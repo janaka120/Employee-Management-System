@@ -119,12 +119,13 @@ export const updateEmployee = async (
     }
     const updatedEmployee = {
       ...employees[employeeIndex],
-      name:
+      firstName:
         firstName !== undefined
           ? firstName
           : employees[employeeIndex].firstName,
       lastName:
         lastName !== undefined ? lastName : employees[employeeIndex].lastName,
+      gender: gender !== undefined ? gender : employees[employeeIndex].gender,
       email: email !== undefined ? email : employees[employeeIndex].email,
       phone: phone !== undefined ? phone : employees[employeeIndex].phone,
       dob: dob !== undefined ? dob : employees[employeeIndex].dob,
