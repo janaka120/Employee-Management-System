@@ -1,14 +1,13 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "../../store";
 import { EmployeeI } from "./employeeTypes";
-import { dataSource } from "../../constants/EmployeeConstant";
 
 interface EmployeeState {
   employeeList: EmployeeI[];
 }
 
 const initialState: EmployeeState = {
-  employeeList: dataSource || [],
+  employeeList: [],
 };
 
 export const employeeSlice = createSlice({
