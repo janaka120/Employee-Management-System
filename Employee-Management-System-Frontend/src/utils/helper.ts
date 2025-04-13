@@ -32,14 +32,14 @@ export const validateDate = (
   dateString: string | undefined | null
 ): boolean | string => {
   if (!dateString) return true;
-  const selectedDate = dayjs(dateString, "YYYY-MM-DD");
+  const selectedDate = dayjs(dateString, DATE_FORMATE);
 
   if (!selectedDate.isValid()) return "Invalid date format";
 
   if (selectedDate.isAfter(dayjs().startOf("day"))) {
     return "Date cannot be in the future";
   }
-  return true; // Date is valid
+  return true;
 };
 
 /**
@@ -95,3 +95,28 @@ export function validName(name: string | null | undefined): boolean | string {
 
   return true;
 }
+
+export const isJoinedDateAfterDOB = (
+  joinedDate: string | null | undefined,
+  dateOfBirth: string | null | undefined
+): true | string => {
+  if (!joinedDate || !dateOfBirth) {
+    return true; // Adjust based on your requirements for empty dates
+  }
+  const joinedDateObj = dayjs(joinedDate, DATE_FORMATE);
+
+  if (!joinedDateObj.isValid()) return "Invalid date format";
+
+  if (joinedDateObj.isAfter(dayjs().startOf("day"))) {
+    return "Date cannot be in the future";
+  }
+
+  const dateOfBirthObj = dayjs(dateOfBirth, DATE_FORMATE);
+  if (!joinedDateObj.isValid() || !dateOfBirthObj.isValid()) {
+    return "Invalid date format.";
+  }
+  if (!joinedDateObj.isAfter(dateOfBirthObj)) {
+    return "Joined Date must be on or after Date of Birth.";
+  }
+  return true;
+};

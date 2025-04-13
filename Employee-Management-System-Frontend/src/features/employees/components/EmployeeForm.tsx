@@ -1,4 +1,4 @@
-import { useForm, Controller, SubmitHandler } from "react-hook-form";
+import { useForm, Controller, SubmitHandler, useWatch } from "react-hook-form";
 import {
   Form,
   Input,
@@ -22,6 +22,7 @@ import {
 } from "../../../constants/EmployeeConstant";
 import {
   formatDate,
+  isJoinedDateAfterDOB,
   validateDate,
   validName,
   validPhoneNumber,
@@ -67,6 +68,8 @@ const EmployeeForm = ({ onSubmit, isSuccess, data }: EmployeeFormI) => {
       reset();
     }
   }, [isSuccess, reset]);
+
+  const dateOfBirth = useWatch({ control, name: "dob" });
 
   return (
     <div className={styles.formContainer}>
@@ -210,7 +213,9 @@ const EmployeeForm = ({ onSubmit, isSuccess, data }: EmployeeFormI) => {
             control={control}
             rules={{
               required: "Joined date is required",
-              validate: validateDate,
+              validate: {
+                isAfterDOB: (value) => isJoinedDateAfterDOB(value, dateOfBirth),
+              },
             }}
             render={({ field }) => (
               <DatePicker
