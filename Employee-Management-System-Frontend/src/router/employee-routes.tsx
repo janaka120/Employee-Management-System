@@ -21,7 +21,7 @@ const EditEmployeePage = React.lazy(
 
 export const employeeRoutes: RouteObject[] = [
   {
-    path: PATHS.EMPLOYEES,
+    path: PATHS.EMPLOYEE_LIST,
     element: <EmployeeListPage />,
   },
   {

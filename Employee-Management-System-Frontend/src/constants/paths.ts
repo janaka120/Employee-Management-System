@@ -1,6 +1,6 @@
 export const PATHS = {
   HOME: "/",
-  EMPLOYEES: "/employee/list",
+  EMPLOYEE_LIST: "/employee/list",
   ADD_EMPLOYEE_DETAIL: "/employee/add",
   EDIT_EMPLOYEE_DETAIL: (employeeId: string) => `/employee/edit/${employeeId}`,
 };

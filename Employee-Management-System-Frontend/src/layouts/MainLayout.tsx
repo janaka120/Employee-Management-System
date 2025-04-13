@@ -1,58 +1,96 @@
-import { Suspense } from "react";
-import { Outlet, Link } from "react-router-dom";
-import { PATHS } from "../constants/paths";
-import { Layout, Menu, Avatar, Space, Typography } from "antd";
-import { SettingOutlined, UserOutlined } from "@ant-design/icons";
-import "./MainLayout.css";
+import { Suspense, useState } from "react";
+import {
+  LaptopOutlined,
+  PlusCircleOutlined,
+  HomeOutlined,
+} from "@ant-design/icons";
+import { Layout, Menu, theme } from "antd";
+import { Link, Outlet } from "react-router-dom";
 import ErrorBoundary from "../components/ErrorBoundary";
 import ErrorFallback from "../components/ErrorFallback";
+import { PATHS } from "../constants/paths";
+import "./MainLayout.css";
 
-const { Header, Content } = Layout;
-const { Title } = Typography;
-
-const menuItems = [
-  { key: "/employees", label: <Link to={PATHS.EMPLOYEES}>Dashboard</Link> },
-  {
-    key: "/employee/add",
-    label: <Link to={PATHS.ADD_EMPLOYEE_DETAIL}>People</Link>,
-  },
-];
+const { Header, Content, Sider } = Layout;
 
 const LoadingFallback = () => <div>Loading Page...</div>;
 
 const MainLayout = () => {
+  const [collapsed, setCollapsed] = useState(false);
+  const {
+    token: { colorBgContainer, borderRadiusLG },
+  } = theme.useToken();
+
   return (
     <Layout style={{ minHeight: "100vh" }}>
-      <Header className="main-header">
-        <div className="logo">
-          <Title level={4} style={{ color: "#fff", margin: 0 }}>
-            EMS
-          </Title>
-        </div>
+      <Sider
+        collapsible
+        collapsed={collapsed}
+        onCollapse={(value) => setCollapsed(value)}
+        breakpoint="md"
+        collapsedWidth="80" // Adjust as needed
+      >
+        <div className="sider-header">EMS</div>
         <Menu
           theme="dark"
-          mode="horizontal"
-          selectedKeys={["/employees", "/employee/add"]}
-          items={menuItems}
-          className="header-menu"
+          defaultSelectedKeys={["employee-list"]}
+          defaultOpenKeys={["employee"]}
+          mode="inline"
+          items={[
+            {
+              key: "employee",
+              icon: <LaptopOutlined />,
+              label: "Employees",
+              children: [
+                {
+                  key: "employee-list",
+                  icon: <HomeOutlined />,
+                  label: <Link to={PATHS.EMPLOYEE_LIST}>Employee List</Link>,
+                },
+                {
+                  key: "employee-add",
+                  icon: <PlusCircleOutlined />,
+                  label: (
+                    <Link to={PATHS.ADD_EMPLOYEE_DETAIL}>Add Employee</Link>
+                  ),
+                },
+              ],
+            },
+          ]}
         />
-        <Space className="header-right">
-          <SettingOutlined
-            style={{ color: "#fff", fontSize: "18px", cursor: "pointer" }}
+      </Sider>
+      <Layout className="site-layout">
+        <Header className="layout-header">
+          <Menu
+            theme="light"
+            mode="horizontal"
+            defaultSelectedKeys={["employee-list"]}
+            style={{ flex: 1, minWidth: 0, lineHeight: "64px" }}
+            items={[
+              {
+                key: "employee-list",
+                icon: <HomeOutlined />,
+                label: <Link to={PATHS.EMPLOYEE_LIST}>Home</Link>,
+              },
+            ]}
           />
-          <Avatar icon={<UserOutlined />} style={{ cursor: "pointer" }} />
-        </Space>
-      </Header>
-      <Layout>
-        <Layout style={{ padding: "0 24px 24px" }}>
-          <Content className="main-content">
+        </Header>
+        <Content className="layout-content">
+          <div
+            style={{
+              padding: 24,
+              minHeight: 360,
+              background: colorBgContainer,
+              borderRadius: borderRadiusLG,
+            }}
+          >
             <ErrorBoundary fallback={<ErrorFallback />}>
               <Suspense fallback={<LoadingFallback />}>
                 <Outlet />
               </Suspense>
             </ErrorBoundary>
-          </Content>
-        </Layout>
+          </div>
+        </Content>
       </Layout>
     </Layout>
   );
