@@ -2,6 +2,7 @@ import { Table, Space, Button, Tag, Popconfirm } from "antd";
 import type { TableProps } from "antd";
 import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
 import { EmployeeI } from "../../../employeeTypes";
+import { useMemo } from "react";
 
 const columns: TableProps<EmployeeI>["columns"] = [
   {
@@ -87,10 +88,16 @@ interface EmployeesTableI {
 }
 
 const EmployeesTable = ({ list }: EmployeesTableI) => {
+  const mappedData = useMemo(() => {
+    return list.map((item) => {
+      return { ...item, key: item.uuid };
+    });
+  }, [list]);
+
   return (
     <Table
       columns={columns}
-      dataSource={list}
+      dataSource={mappedData}
       scroll={{ x: "max-content" }}
       pagination={{ pageSize: 10 }}
     />

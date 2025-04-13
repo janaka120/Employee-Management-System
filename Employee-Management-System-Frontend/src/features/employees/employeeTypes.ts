@@ -9,4 +9,8 @@ export interface EmployeeI {
   joinedDate: string;
 }
 
-type GenderType = "Male" | "Female" | "Other";
+export type GenderType = "Male" | "Female" | "Other";
+
+export type EmployeeFormDataI = Omit<EmployeeI, "gender"> & {
+  gender: GenderType | null;
+};
