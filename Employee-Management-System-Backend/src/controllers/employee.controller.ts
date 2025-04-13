@@ -17,11 +17,13 @@ export const getAllEmployees = async (
 ): Promise<void> => {
   try {
     const employees = await readEmployees();
-    res.status(200).json(employees);
+    res.status(200).json({ data: employees, status: "success" });
   } catch (error) {
-    res
-      .status(500)
-      .json({ message: "Error fetching employees", error: error.message });
+    res.status(500).json({
+      status: "fail",
+      message: "Error fetching employees",
+      error: error.message,
+    });
   }
 };
 
@@ -34,14 +36,16 @@ export const getEmployeeById = async (
     const employees = await readEmployees();
     const employee = employees.find((i) => i.uuid === req.params.id);
     if (employee) {
-      res.status(200).json(employee);
+      res.status(200).json({ data: employee, status: "success" });
     } else {
-      res.status(404).json({ message: "Employee not found" });
+      res.status(404).json({ message: "Employee not found", status: "fail" });
     }
   } catch (error) {
-    res
-      .status(500)
-      .json({ message: "Error fetching employee", error: error.message });
+    res.status(500).json({
+      status: "fail",
+      message: "Error fetching employee",
+      error: error.message,
+    });
   }
 };
 
@@ -64,7 +68,9 @@ export const createEmployee = async (
       !isValidEmail(email) ||
       !isValidPhoneNumber(phone)
     ) {
-      res.status(400).json({ message: "Employee details is required" });
+      res
+        .status(400)
+        .json({ status: "fail", message: "Employee details is required" });
       return;
     }
 
@@ -85,11 +91,13 @@ export const createEmployee = async (
     employees.push(newEmployee);
     await writeEmployees(employees);
 
-    res.status(201).json(newEmployee);
+    res.status(201).json({ data: newEmployee, status: "success" });
   } catch (error) {
-    res
-      .status(500)
-      .json({ message: "Error creating item", error: error.message });
+    res.status(500).json({
+      status: "fail",
+      message: "Error creating item",
+      error: error.message,
+    });
   }
 };
 
@@ -106,7 +114,7 @@ export const updateEmployee = async (
     const employeeIndex = employees.findIndex((i) => i.uuid === employeeId);
 
     if (employeeIndex === -1) {
-      res.status(404).json({ message: "Employee not found" });
+      res.status(404).json({ status: "fail", message: "Employee not found" });
       return;
     }
     const updatedEmployee = {
@@ -130,11 +138,13 @@ export const updateEmployee = async (
     employees[employeeIndex] = updatedEmployee;
     await writeEmployees(employees);
 
-    res.status(200).json(updatedEmployee);
+    res.status(200).json({ status: "success", data: updatedEmployee });
   } catch (error) {
-    res
-      .status(500)
-      .json({ message: "Error updating item", error: error.message });
+    res.status(500).json({
+      status: "fail",
+      message: "Error updating item",
+      error: error.message,
+    });
   }
 };
 
@@ -144,21 +154,23 @@ export const deleteEmployee = async (
   res: Response
 ): Promise<void> => {
   try {
-    const itemId = req.params.id;
+    const employeeId = req.params.id;
     const employees = await readEmployees();
     const initialLength = employees.length;
-    const filteredEmployees = employees.filter((i) => i.uuid !== itemId);
+    const filteredEmployees = employees.filter((i) => i.uuid !== employeeId);
 
     if (filteredEmployees.length === initialLength) {
-      res.status(404).json({ message: "Employee not found" });
+      res.status(404).json({ status: "fail", message: "Employee not found" });
       return;
     }
 
     await writeEmployees(filteredEmployees);
-    res.status(204).send();
+    res.status(204).json({ data: employeeId, status: "success" });
   } catch (error) {
-    res
-      .status(500)
-      .json({ message: "Error deleting employee", error: error.message });
+    res.status(500).json({
+      status: "fail",
+      message: "Error deleting employee",
+      error: error.message,
+    });
   }
 };

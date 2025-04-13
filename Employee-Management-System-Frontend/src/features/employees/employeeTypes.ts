@@ -14,3 +14,11 @@ export type GenderType = "Male" | "Female" | "Other";
 export type EmployeeFormDataI = Omit<EmployeeI, "gender"> & {
   gender: GenderType | null;
 };
+
+export interface ApiResponse {
+  status: "success" | "fail";
+  data?: any;
+  message?: string;
+}
+
+export type AddEmployeeDataI = Omit<EmployeeI, "uuid">;
