@@ -4,22 +4,39 @@ import {
   EmployeeFromDataI,
   EmployeeFormDataI,
   GenderType,
+  EmployeeI,
 } from "../../employeeTypes";
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { updateEmployee } from "../../services/employeesApi";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import {
+  employeeDetailsQueryKey,
+  getEmployeeDetails,
+  updateEmployee,
+} from "../../services/employeesApi";
 import EmployeeForm from "../../components/EmployeeForm";
 import { useNavigate, useParams } from "react-router-dom";
-import { useAppSelector } from "../../../../store/store-hooks";
-import { selectEmployeeList } from "../../employeeSlice";
 
 const EditEmployeeDetailsPage = () => {
   const { employeeId } = useParams();
   const navigate = useNavigate();
-
+  const queryKey = employeeDetailsQueryKey(employeeId);
   const queryClient = useQueryClient();
 
-  const employeeList = useAppSelector(selectEmployeeList);
-  const selectedEmployee = employeeList.find((e) => e.uuid === employeeId);
+  const {
+    data: selectedEmployee,
+    isLoading,
+    isError,
+    error,
+  } = useQuery<
+    EmployeeI,
+    Error,
+    EmployeeI,
+    ReturnType<typeof employeeDetailsQueryKey>
+  >({
+    queryKey,
+    queryFn: getEmployeeDetails,
+    enabled: !!employeeId,
+    retry: 3,
+  });
 
   const { mutate, isSuccess } = useMutation({
     mutationFn: updateEmployee,
@@ -49,6 +66,14 @@ const EditEmployeeDetailsPage = () => {
       mutate({ id: employeeId, data: employeeData });
     }
   };
+
+  if (isLoading) {
+    return <div>Loading employee details...</div>;
+  }
+
+  if (isError) {
+    return <div>Error loading employee details: {error?.message}</div>;
+  }
 
   return (
     <EmployeeForm

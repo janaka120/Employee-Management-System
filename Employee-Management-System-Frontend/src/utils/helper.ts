@@ -74,3 +74,24 @@ export function validPhoneNumber(
 export const formatDate = (date: Dayjs | null | undefined): string => {
   return date ? date.format(DATE_FORMATE) : "";
 };
+
+/**
+ * validate given name | Minimum 6 characters, maximum 10 characters
+ * @param name: string | null | undefined
+ * @returns boolean | string
+ */
+export function validName(name: string | null | undefined): boolean | string {
+  if (!name || typeof name !== "string") {
+    return true;
+  }
+
+  if (name.length < 6) {
+    return "Minimum 6 characters required";
+  }
+
+  if (name.length < 6 || name.length > 10) {
+    return "Maximum 10 characters exceeded";
+  }
+
+  return true;
+}

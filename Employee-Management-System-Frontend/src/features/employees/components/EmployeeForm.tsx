@@ -3,13 +3,13 @@ import {
   Form,
   Input,
   Button,
-  Select,
   DatePicker,
   Space,
   Typography,
   message,
   Row,
   Col,
+  Radio,
 } from "antd";
 import dayjs from "dayjs";
 
@@ -23,11 +23,11 @@ import {
 import {
   formatDate,
   validateDate,
+  validName,
   validPhoneNumber,
 } from "../../../utils/helper";
 import { useEffect } from "react";
 
-const { Option } = Select;
 const { Title } = Typography;
 
 interface EmployeeFormI {
@@ -35,6 +35,10 @@ interface EmployeeFormI {
   isSuccess: boolean;
   data?: EmployeeI;
 }
+
+const GENDER_RADIO_OPTIONS = GENDER_MENU.map((gender) => {
+  return { value: gender, label: gender };
+});
 
 const EmployeeForm = ({ onSubmit, isSuccess, data }: EmployeeFormI) => {
   const {
@@ -46,6 +50,12 @@ const EmployeeForm = ({ onSubmit, isSuccess, data }: EmployeeFormI) => {
     defaultValues: data || DEFAULT_EMPLOYEE_FORM,
     mode: "onBlur",
   });
+
+  useEffect(() => {
+    if (data?.uuid) {
+      reset(data);
+    }
+  }, [data, reset]);
 
   const onError = (formErrors: typeof errors) => {
     console.error("Form validation errors:", formErrors);
@@ -78,7 +88,10 @@ const EmployeeForm = ({ onSubmit, isSuccess, data }: EmployeeFormI) => {
               <Controller
                 name="firstName"
                 control={control}
-                rules={{ required: "First name is required" }}
+                rules={{
+                  required: "First name is required",
+                  validate: validName,
+                }}
                 render={({ field }) => (
                   <Input {...field} placeholder="Enter first name" />
                 )}
@@ -94,7 +107,10 @@ const EmployeeForm = ({ onSubmit, isSuccess, data }: EmployeeFormI) => {
               <Controller
                 name="lastName"
                 control={control}
-                rules={{ required: "Last name is required" }}
+                rules={{
+                  required: "Last name is required",
+                  validate: validName,
+                }}
                 render={({ field }) => (
                   <Input {...field} placeholder="Enter last name" />
                 )}
@@ -155,11 +171,7 @@ const EmployeeForm = ({ onSubmit, isSuccess, data }: EmployeeFormI) => {
               required: "Please select a gender",
             }}
             render={({ field }) => (
-              <Select {...field} placeholder="Select gender">
-                {GENDER_MENU.map((item) => (
-                  <Option value={item}>{item}</Option>
-                ))}
-              </Select>
+              <Radio.Group {...field} options={GENDER_RADIO_OPTIONS} />
             )}
           />
         </Form.Item>
