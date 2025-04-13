@@ -1,15 +1,15 @@
 import { useEffect } from "react";
-import { Alert } from "antd";
+import { Alert, message } from "antd";
 import { useAppDispatch, useAppSelector } from "../../../../store/store-hooks";
 import { selectEmployeeList, setEmployeeList } from "../../employeeSlice";
 import EmployeesTable from "./components/EmployeesTable";
-import { useQuery } from "@tanstack/react-query";
-import { getAllEmployees } from "../../services/employeesApi";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { deleteEmployee, getAllEmployees } from "../../services/employeesApi";
 
 function EmployeeListPage() {
   const employeeList = useAppSelector(selectEmployeeList);
   const dispatch = useAppDispatch();
-
+  const queryClient = useQueryClient();
   const {
     data: fetchedEmployees,
     isLoading,
@@ -25,6 +25,19 @@ function EmployeeListPage() {
       dispatch(setEmployeeList(fetchedEmployees));
     }
   }, [dispatch, fetchedEmployees]);
+
+  const { mutate } = useMutation({
+    mutationFn: deleteEmployee,
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["employees"] });
+      message.success("Employee deleted successfully!");
+    },
+    onError: (err: Error) => {
+      message.error(
+        `Failed to delete employee: ${err.message || "Something went wrong."}`
+      );
+    },
+  });
 
   if (isLoading) {
     return <div>Loading employees...</div>;
@@ -47,7 +60,7 @@ function EmployeeListPage() {
     <div>
       <h1>Employee List Page</h1>
       <div>
-        <EmployeesTable list={employeeList} />
+        <EmployeesTable list={employeeList} deleteHandler={mutate} />
       </div>
     </div>
   );

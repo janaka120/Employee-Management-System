@@ -68,3 +68,23 @@ export const updateEmployee = async (payload: updateEmployeeParam) => {
     throw new Error("Something went wrong");
   }
 };
+
+export const deleteEmployee = async (id: string) => {
+  try {
+    if (!id) {
+      throw new Error("Employee uuid required");
+    }
+    const response: ApiResponse = await axios.delete(
+      `${API_BASE_URL}/employees/${id}`
+    );
+    const resData: ApiResponse = response?.data;
+    if (resData.status === "success") {
+      return resData.data;
+    }
+
+    throw new Error(resData.message || "Fail to delete employee");
+  } catch (e) {
+    console.log("Error | deleteEmployee:", e);
+    throw new Error("Something went wrong");
+  }
+};
