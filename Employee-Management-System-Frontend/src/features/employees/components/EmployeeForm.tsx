@@ -60,7 +60,9 @@ const EmployeeForm = ({ onSubmit, isSuccess, data }: EmployeeFormI) => {
 
   return (
     <div className={styles.formContainer}>
-      <Title level={3}>Add New Employee</Title>
+      <Title level={3}>
+        {data?.uuid ? "Update Employee" : "Add New Employee"}
+      </Title>
       <Form
         layout="vertical"
         labelCol={{ span: 8 }}
@@ -219,7 +221,7 @@ const EmployeeForm = ({ onSubmit, isSuccess, data }: EmployeeFormI) => {
               loading={isSubmitting}
               disabled={isSubmitting}
             >
-              Add Employee
+              {data?.uuid ? "Update Employee" : "Add Employee"}
             </Button>
             <Button
               htmlType="button"

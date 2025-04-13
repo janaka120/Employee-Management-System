@@ -3,6 +3,7 @@ import type { TableProps } from "antd";
 import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
 import { EmployeeI } from "../../../employeeTypes";
 import { useMemo } from "react";
+import { Link } from "react-router-dom";
 
 const columns: TableProps<EmployeeI>["columns"] = [
   {
@@ -54,14 +55,15 @@ const columns: TableProps<EmployeeI>["columns"] = [
     key: "action",
     render: (_, record) => (
       <Space size="middle">
-        <Button
-          type="link"
-          icon={<EditOutlined />}
-          onClick={() => console.log(record.uuid)}
-          aria-label={`Edit user ${record.firstName} ${record.lastName}`}
-        >
-          Edit
-        </Button>
+        <Link to={`/employee/edit/${record.uuid}`}>
+          <Button
+            type="link"
+            icon={<EditOutlined />}
+            aria-label={`Edit user ${record.firstName} ${record.lastName}`}
+          >
+            Edit
+          </Button>
+        </Link>
         <Popconfirm
           title="Delete user"
           description={`Are you sure you want to delete ${record.firstName} ${record.lastName}?`}

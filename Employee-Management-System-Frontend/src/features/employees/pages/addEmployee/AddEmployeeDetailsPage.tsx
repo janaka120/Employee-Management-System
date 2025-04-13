@@ -1,7 +1,7 @@
 import { SubmitHandler } from "react-hook-form";
 import { message } from "antd";
 import {
-  AddEmployeeDataI,
+  EmployeeFromDataI,
   EmployeeFormDataI,
   GenderType,
 } from "../../employeeTypes";
@@ -27,7 +27,7 @@ const AddEmployeeDetailsPage = () => {
 
   const onSubmit: SubmitHandler<EmployeeFormDataI> = async (data) => {
     console.log("Form Submitted Data:", data);
-    const employeeData: AddEmployeeDataI = {
+    const employeeData: EmployeeFromDataI = {
       firstName: data.firstName,
       lastName: data.lastName,
       email: data.email,

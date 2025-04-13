@@ -21,4 +21,4 @@ export interface ApiResponse {
   message?: string;
 }
 
-export type AddEmployeeDataI = Omit<EmployeeI, "uuid">;
+export type EmployeeFromDataI = Omit<EmployeeI, "uuid">;
