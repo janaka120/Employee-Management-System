@@ -166,7 +166,7 @@ export const deleteEmployee = async (
     }
 
     await writeEmployees(filteredEmployees);
-    res.status(204).json({ data: employeeId, status: "success" });
+    res.status(200).json({ data: employeeId, status: "success" });
   } catch (error) {
     res.status(500).json({
       status: "fail",
