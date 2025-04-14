@@ -1,7 +1,7 @@
 import axios from "axios";
 import { API_BASE_URL } from "../../../constants/EmployeeConstant";
-import { isCompleteEmployee } from "../../../utils/helper";
-import { EmployeeFromDataI, ApiResponse, EmployeeI } from "../employeeTypes";
+import { isCompleteEmployee } from "../../../utils/helpers";
+import { EmployeeFromDataI, ApiResponse, EmployeeI } from "../EmployeeTypes";
 import { QueryFunctionContext } from "@tanstack/react-query";
 
 const formateEmployeesData = (data: EmployeeI[]) => {
