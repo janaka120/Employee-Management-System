@@ -185,11 +185,11 @@ This is the default url backend server runs **http://localhost:3000**
 
 A demo video of the **"Add Product"** flow recorded using Cypress is included in the project.
 
-- **Location**: `cypress/videos/add-product.spec.cy.js.mp4`
+- **Location**: `Employee-Management-System-Frontend/cypress/videos/add-product.spec.cy.js.mp4`
 
 You can watch the video to see how the form is filled and submitted successfully using end-to-end testing.
 
-### Screenshots:
+### Screenshots: **"Only Added for References"**
 
 Home Page: ![Project Homepage](Employee-Management-System-Frontend/public/images/screenshots/home-screen.png)
 Add Employee Page: ![Project Homepage](Employee-Management-System-Frontend/public/images/screenshots/add-screen.png)
@@ -199,6 +199,8 @@ Unsave Data Notification: ![Project Homepage](Employee-Management-System-Fronten
 
 Vitest Test Results: ![Project Homepage](Employee-Management-System-Frontend/public/images/screenshots/vitest-result.png)
 Cypress E2E Test Results: ![Project Homepage](Employee-Management-System-Frontend/public/images/screenshots/cypress-result.png)
+
+[Cypress Test Run](Employee-Management-System-Frontend/public/employeeForm.cy.js.mp4)
 
 ### Development Assumptions
 
