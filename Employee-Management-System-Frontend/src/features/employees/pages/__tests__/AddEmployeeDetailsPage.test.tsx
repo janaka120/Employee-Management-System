@@ -15,6 +15,14 @@ vi.mock("../../components/EmployeeForm", () => ({
   ),
 }));
 
+vi.mock("react-router-dom", async () => {
+  const actual = await vi.importActual("react-router-dom");
+  return {
+    ...actual,
+    useNavigate: () => vi.fn(),
+  };
+});
+
 vi.mock("antd", async () => {
   const antd = await vi.importActual<typeof import("antd")>("antd");
   return {

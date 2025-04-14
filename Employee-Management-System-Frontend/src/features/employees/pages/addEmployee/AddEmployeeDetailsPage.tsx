@@ -8,9 +8,11 @@ import {
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { addEmployee } from "../../services/EmployeesApi";
 import EmployeeForm from "../../components/EmployeeForm";
+import { useNavigate } from "react-router-dom";
 
 const AddEmployeeDetailsPage = () => {
   const queryClient = useQueryClient();
+  const navigate = useNavigate();
 
   const { mutate, isSuccess } = useMutation({
     mutationFn: addEmployee,
@@ -37,7 +39,14 @@ const AddEmployeeDetailsPage = () => {
     };
     mutate(employeeData);
   };
-  return <EmployeeForm onSubmit={onSubmit} isSuccess={isSuccess} />;
+
+  return (
+    <EmployeeForm
+      onSubmit={onSubmit}
+      isSuccess={isSuccess}
+      onCancel={() => navigate(-1)}
+    />
+  );
 };
 
 export default AddEmployeeDetailsPage;

@@ -6,6 +6,7 @@ import { vi } from "vitest";
 import { EmployeeI } from "../../EmployeeTypes";
 
 const mockSubmit = vi.fn();
+const mockCancel = vi.fn();
 
 const mockEmployee: EmployeeI = {
   uuid: "uuid-1",
@@ -20,7 +21,13 @@ const mockEmployee: EmployeeI = {
 
 describe("EmployeeForm component", () => {
   beforeEach(() => {
-    render(<EmployeeForm onSubmit={mockSubmit} isSuccess={false} />);
+    render(
+      <EmployeeForm
+        onSubmit={mockSubmit}
+        isSuccess={false}
+        onCancel={mockCancel}
+      />
+    );
   });
 
   it("should renders all the form fields", () => {
@@ -41,6 +48,7 @@ describe("EmployeeForm component", () => {
 
     expect(screen.getByText(/add employee/i)).toBeInTheDocument();
     expect(screen.getByText(/reset/i)).toBeInTheDocument();
+    expect(screen.getByText(/cancel/i)).toBeInTheDocument();
   });
 
   it("submits form with enter valid input", async () => {
@@ -116,7 +124,12 @@ describe("EmployeeForm component", () => {
 
   it("should pre-fill form with existing employee data", () => {
     render(
-      <EmployeeForm onSubmit={vi.fn()} isSuccess={false} data={mockEmployee} />
+      <EmployeeForm
+        onSubmit={vi.fn()}
+        isSuccess={false}
+        data={mockEmployee}
+        onCancel={mockCancel}
+      />
     );
 
     expect(screen.getByDisplayValue("FirstName")).toBeInTheDocument();
@@ -139,6 +152,7 @@ describe("EmployeeForm component", () => {
         onSubmit={mockSubmit}
         isSuccess={false}
         data={{ ...mockEmployee, firstName: "" }}
+        onCancel={mockCancel}
       />
     );
 

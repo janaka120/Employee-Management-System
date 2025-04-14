@@ -81,6 +81,7 @@ const EditEmployeeDetailsPage = () => {
       onSubmit={onSubmit}
       isSuccess={isSuccess}
       data={selectedEmployee}
+      onCancel={() => navigate(-1)}
     />
   );
 };

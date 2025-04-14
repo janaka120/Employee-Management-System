@@ -36,13 +36,19 @@ interface EmployeeFormI {
   onSubmit: SubmitHandler<EmployeeFormDataI>;
   isSuccess: boolean;
   data?: EmployeeI;
+  onCancel: () => void;
 }
 
 const GENDER_RADIO_OPTIONS = GENDER_MENU.map((gender) => {
   return { value: gender, label: gender };
 });
 
-const EmployeeForm = ({ onSubmit, isSuccess, data }: EmployeeFormI) => {
+const EmployeeForm = ({
+  onSubmit,
+  isSuccess,
+  data,
+  onCancel,
+}: EmployeeFormI) => {
   const {
     control,
     handleSubmit,
@@ -247,6 +253,9 @@ const EmployeeForm = ({ onSubmit, isSuccess, data }: EmployeeFormI) => {
               disabled={!isDirty || isSubmitting}
             >
               Reset
+            </Button>
+            <Button style={{ marginLeft: 8 }} onClick={onCancel}>
+              Cancel
             </Button>
           </Space>
         </Form.Item>
