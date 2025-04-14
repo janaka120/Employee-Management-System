@@ -29,7 +29,7 @@ describe("MainSider", () => {
     expect(addLink).toHaveAttribute("href", PATHS.ADD_EMPLOYEE_DETAIL);
   });
 
-  it.only("collapses and expands when toggle is clicked", () => {
+  it("collapses and expands when toggle is clicked", () => {
     renderWithRouter();
 
     const sider = document.querySelector(".ant-layout-sider")!;

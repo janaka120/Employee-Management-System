@@ -36,7 +36,7 @@ const renderComponent = (list = mockEmployees, deleteHandler = vi.fn()) => {
 };
 
 describe("EmployeesTable", () => {
-  it.only("renders table with employee data", async () => {
+  it("renders table with employee data", async () => {
     renderComponent();
     expect(screen.getByText("Name")).toBeInTheDocument();
     expect(screen.getByText("Email")).toBeInTheDocument();
@@ -72,7 +72,7 @@ describe("EmployeesTable", () => {
 
     const user = userEvent.setup();
     const deleteButton = screen.getByRole("button", {
-      name: /delete user jane lastName1/i,
+      name: /delete user firstName1 lastName1/i,
     });
 
     await user.click(deleteButton);
