@@ -5,15 +5,16 @@ import {
   EmployeeFormDataI,
   GenderType,
   EmployeeI,
-} from "../../employeeTypes";
+} from "../../EmployeeTypes";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import {
   employeeDetailsQueryKey,
   getEmployeeDetails,
   updateEmployee,
-} from "../../services/employeesApi";
+} from "../../services/EmployeesApi";
 import EmployeeForm from "../../components/EmployeeForm";
 import { useNavigate, useParams } from "react-router-dom";
+import LoadingIndicator from "../../../../components/LoadingIndicator";
 
 const EditEmployeeDetailsPage = () => {
   const { employeeId } = useParams();
@@ -68,7 +69,7 @@ const EditEmployeeDetailsPage = () => {
   };
 
   if (isLoading) {
-    return <div>Loading employee details...</div>;
+    return <LoadingIndicator text="Loading employee details..." />;
   }
 
   if (isError) {
