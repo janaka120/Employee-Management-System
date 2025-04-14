@@ -191,9 +191,9 @@ You can watch the video to see how the form is filled and submitted successfully
 
 ### Screenshots:
 
-Home Page: ![Project Homepage](public/images/screenshots/home-screen.png)
-Add Employee Page: ![Project Homepage](public/images/screenshots/add-screen.png)
-Unsave Data Notification: ![Project Homepage](public/images/screenshots/unsave-form-changes.png)
+Home Page: ![Project Homepage](Employee-Management-System-Frontend/public/images/screenshots/home-screen.png)
+Add Employee Page: ![Project Homepage](Employee-Management-System-Frontend/public/images/screenshots/add-screen.png)
+Unsave Data Notification: ![Project Homepage](Employee-Management-System-Frontend/public/images/screenshots/unsave-form-changes.png)
 
 ### Development Assumptions
 
