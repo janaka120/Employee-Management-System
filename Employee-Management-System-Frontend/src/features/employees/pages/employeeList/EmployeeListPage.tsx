@@ -1,11 +1,13 @@
 import { useEffect } from "react";
-import { Alert, message } from "antd";
+import { Alert, message, Typography } from "antd";
 import { useAppDispatch, useAppSelector } from "../../../../store/store-hooks";
 import { selectEmployeeList, setEmployeeList } from "../../EmployeeSlice";
 import EmployeesTable from "./components/EmployeesTable";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { deleteEmployee, getAllEmployees } from "../../services/EmployeesApi";
 import LoadingIndicator from "../../../../components/LoadingIndicator";
+
+const { Title } = Typography;
 
 const EmployeeListPage = () => {
   const employeeList = useAppSelector(selectEmployeeList);
@@ -57,12 +59,10 @@ const EmployeeListPage = () => {
     );
   }
   return (
-    <div>
-      <h1>Employee List Page</h1>
-      <div>
-        <EmployeesTable list={employeeList} deleteHandler={mutate} />
-      </div>
-    </div>
+    <>
+      <Title level={2}>Employee List Page</Title>
+      <EmployeesTable list={employeeList} deleteHandler={mutate} />
+    </>
   );
 };
 

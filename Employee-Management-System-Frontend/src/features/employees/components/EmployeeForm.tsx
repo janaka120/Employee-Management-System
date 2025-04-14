@@ -80,7 +80,7 @@ const EmployeeForm = ({
 
   return (
     <div className="formContainer">
-      <Title level={3}>
+      <Title level={2}>
         {data?.uuid ? "Update Employee" : "Add New Employee"}
       </Title>
       <Form
