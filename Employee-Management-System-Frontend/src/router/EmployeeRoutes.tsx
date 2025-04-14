@@ -1,21 +1,18 @@
 import React from "react";
 import { RouteObject } from "react-router-dom";
-import { PATHS } from "../constants/paths.ts";
+import { PATHS } from "../constants/Paths.ts";
 
 const EmployeeListPage = React.lazy(
-  () =>
-    import("./../features/employees/pages/employeeList/EmployeeListPage.tsx")
+  () => import("../features/employees/pages/employeeList/EmployeeListPage.tsx")
 );
 const AddEmployeePage = React.lazy(
   () =>
-    import(
-      "./../features/employees/pages/addEmployee/AddEmployeeDetailsPage.tsx"
-    )
+    import("../features/employees/pages/addEmployee/AddEmployeeDetailsPage.tsx")
 );
 const EditEmployeePage = React.lazy(
   () =>
     import(
-      "./../features/employees/pages/editEmployee/EditEmployeeDetailsPage.tsx"
+      "../features/employees/pages/editEmployee/EditEmployeeDetailsPage.tsx"
     )
 );
 
