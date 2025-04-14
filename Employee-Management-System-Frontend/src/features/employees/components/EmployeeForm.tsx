@@ -5,12 +5,12 @@ import {
   Input,
   Button,
   DatePicker,
-  Space,
   Typography,
   message,
   Row,
   Col,
   Radio,
+  Flex,
 } from "antd";
 import dayjs from "dayjs";
 
@@ -241,7 +241,7 @@ const EmployeeForm = ({
           />
         </Form.Item>
         <Form.Item>
-          <Space className="formSubmitBtnContainer">
+          <Flex wrap gap="small" align="flex-start">
             <Button
               type="primary"
               htmlType="submit"
@@ -260,7 +260,7 @@ const EmployeeForm = ({
             <Button style={{ marginLeft: 8 }} onClick={onCancel}>
               Cancel
             </Button>
-          </Space>
+          </Flex>
         </Form.Item>
       </Form>
     </div>
