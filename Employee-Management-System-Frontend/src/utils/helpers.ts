@@ -2,7 +2,7 @@ import {
   DATE_FORMATE,
   SINGAPORE_COUNTRY_CODE,
 } from "../constants/EmployeeConstant";
-import { EmployeeI } from "../features/employees/employeeTypes";
+import { EmployeeI } from "../features/employees/EmployeeTypes";
 import dayjs, { Dayjs } from "dayjs";
 
 /**
