@@ -29,6 +29,7 @@ import {
 } from "../../../utils/helpers";
 
 import "./EmployeeForm.css";
+import usePageChangeListerHook from "../hooks/usePageChangeListerHook";
 
 const { Title } = Typography;
 
@@ -58,6 +59,8 @@ const EmployeeForm = ({
     defaultValues: data || DEFAULT_EMPLOYEE_FORM,
     mode: "onBlur",
   });
+
+  usePageChangeListerHook(isDirty);
 
   useEffect(() => {
     if (data?.uuid) {
