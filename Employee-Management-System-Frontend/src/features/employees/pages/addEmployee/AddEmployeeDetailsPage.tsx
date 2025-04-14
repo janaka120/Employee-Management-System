@@ -4,9 +4,9 @@ import {
   EmployeeFromDataI,
   EmployeeFormDataI,
   GenderType,
-} from "../../employeeTypes";
+} from "../../EmployeeTypes";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { addEmployee } from "../../services/employeesApi";
+import { addEmployee } from "../../services/EmployeesApi";
 import EmployeeForm from "../../components/EmployeeForm";
 
 const AddEmployeeDetailsPage = () => {
@@ -26,7 +26,6 @@ const AddEmployeeDetailsPage = () => {
   });
 
   const onSubmit: SubmitHandler<EmployeeFormDataI> = async (data) => {
-    console.log("Form Submitted Data:", data);
     const employeeData: EmployeeFromDataI = {
       firstName: data.firstName,
       lastName: data.lastName,
