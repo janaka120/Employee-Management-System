@@ -8,13 +8,6 @@
   color: #fff;
 }
 
-.layout-header {
-  padding: 0px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
 .layout-content {
   margin: 16px;
 }
