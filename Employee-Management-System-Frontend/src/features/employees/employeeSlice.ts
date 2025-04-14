@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { RootState } from "../../store";
-import { EmployeeI } from "./employeeTypes";
+import { EmployeeI } from "./EmployeeTypes";
 
 interface EmployeeState {
   employeeList: EmployeeI[];

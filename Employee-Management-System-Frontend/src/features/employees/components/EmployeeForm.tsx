@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { useForm, Controller, SubmitHandler, useWatch } from "react-hook-form";
 import {
   Form,
@@ -13,8 +14,7 @@ import {
 } from "antd";
 import dayjs from "dayjs";
 
-import styles from "./EmployeeForm.module.css";
-import { EmployeeFormDataI, EmployeeI } from "../employeeTypes";
+import { EmployeeFormDataI, EmployeeI } from "../EmployeeTypes";
 import {
   DEFAULT_EMPLOYEE_FORM,
   GENDER_MENU,
@@ -26,8 +26,9 @@ import {
   validateDate,
   validName,
   validPhoneNumber,
-} from "../../../utils/helper";
-import { useEffect } from "react";
+} from "../../../utils/helpers";
+
+import styles from "./EmployeeForm.css";
 
 const { Title } = Typography;
 
@@ -46,7 +47,7 @@ const EmployeeForm = ({ onSubmit, isSuccess, data }: EmployeeFormI) => {
     control,
     handleSubmit,
     reset,
-    formState: { errors, isSubmitting },
+    formState: { errors, isSubmitting, isDirty },
   } = useForm<EmployeeFormDataI>({
     defaultValues: data || DEFAULT_EMPLOYEE_FORM,
     mode: "onBlur",
@@ -236,14 +237,14 @@ const EmployeeForm = ({ onSubmit, isSuccess, data }: EmployeeFormI) => {
               type="primary"
               htmlType="submit"
               loading={isSubmitting}
-              disabled={isSubmitting}
+              disabled={!isDirty || isSubmitting}
             >
               {data?.uuid ? "Update Employee" : "Add Employee"}
             </Button>
             <Button
               htmlType="button"
               onClick={() => reset()}
-              disabled={isSubmitting}
+              disabled={!isDirty || isSubmitting}
             >
               Reset
             </Button>
