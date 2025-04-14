@@ -1,11 +1,25 @@
-import { Result } from "antd";
+import { Result, Button } from "antd";
+import { useNavigate } from "react-router-dom";
 
-const ErrorFallback: React.FC = () => (
-  <Result
-    status="warning"
-    title="Page Error"
-    subTitle="Failed to load this page section."
-  />
-);
+interface ErrorFallbackI {
+  error?: Error | null;
+}
+
+const ErrorFallback = ({ error }: ErrorFallbackI) => {
+  const navigate = useNavigate();
+
+  return (
+    <Result
+      status="error"
+      title="Oops! Something went wrong."
+      subTitle={error?.message || "An unexpected error occurred."}
+      extra={[
+        <Button key="home" onClick={() => navigate("/")}>
+          Go Home
+        </Button>,
+      ]}
+    />
+  );
+};
 
 export default ErrorFallback;
