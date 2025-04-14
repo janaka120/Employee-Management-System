@@ -1,9 +1,10 @@
 import { Table, Space, Button, Tag, Popconfirm } from "antd";
 import type { TableProps } from "antd";
 import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
-import { EmployeeI } from "../../../employeeTypes";
+import { EmployeeI } from "../../../EmployeeTypes";
 import { useMemo } from "react";
 import { Link } from "react-router-dom";
+import { PAGE_SIZE } from "../../../../../constants/EmployeeConstant";
 
 interface EmployeesTableI {
   list: EmployeeI[];
@@ -106,7 +107,7 @@ const EmployeesTable = ({ list, deleteHandler }: EmployeesTableI) => {
       columns={columns}
       dataSource={mappedData}
       scroll={{ x: "max-content" }}
-      pagination={{ pageSize: 10 }}
+      pagination={{ pageSize: PAGE_SIZE }}
     />
   );
 };
