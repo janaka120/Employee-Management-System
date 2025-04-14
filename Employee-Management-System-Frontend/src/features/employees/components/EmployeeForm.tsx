@@ -28,7 +28,7 @@ import {
   validPhoneNumber,
 } from "../../../utils/helpers";
 
-import styles from "./EmployeeForm.css";
+import "./EmployeeForm.css";
 
 const { Title } = Typography;
 
@@ -73,7 +73,7 @@ const EmployeeForm = ({ onSubmit, isSuccess, data }: EmployeeFormI) => {
   const dateOfBirth = useWatch({ control, name: "dob" });
 
   return (
-    <div className={styles.formContainer}>
+    <div className="formContainer">
       <Title level={3}>
         {data?.uuid ? "Update Employee" : "Add New Employee"}
       </Title>
@@ -232,7 +232,7 @@ const EmployeeForm = ({ onSubmit, isSuccess, data }: EmployeeFormI) => {
           />
         </Form.Item>
         <Form.Item>
-          <Space className={styles.formSubmitBtnContainer}>
+          <Space className="formSubmitBtnContainer">
             <Button
               type="primary"
               htmlType="submit"
