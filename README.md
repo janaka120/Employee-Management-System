@@ -200,8 +200,6 @@ Unsave Data Notification: ![Project Homepage](Employee-Management-System-Fronten
 Vitest Test Results: ![Project Homepage](Employee-Management-System-Frontend/public/images/screenshots/vitest-result.png)
 Cypress E2E Test Results: ![Project Homepage](Employee-Management-System-Frontend/public/images/screenshots/cypress-result.png)
 
-[Cypress Test Run](Employee-Management-System-Frontend/public/employeeForm.cy.js.mp4)
-
 ### Development Assumptions
 
 During the development of the "User Navigates Away Warning for Unsaved Changes" feature, the following assumption was made:
