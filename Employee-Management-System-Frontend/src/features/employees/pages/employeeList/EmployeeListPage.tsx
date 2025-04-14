@@ -60,7 +60,7 @@ const EmployeeListPage = () => {
   }
   return (
     <>
-      <Title level={2}>Employee List Page</Title>
+      <Title level={2}>Employees Summary</Title>
       <EmployeesTable list={employeeList} deleteHandler={mutate} />
     </>
   );

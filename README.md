@@ -195,6 +195,11 @@ Home Page: ![Project Homepage](Employee-Management-System-Frontend/public/images
 Add Employee Page: ![Project Homepage](Employee-Management-System-Frontend/public/images/screenshots/add-screen.png)
 Unsave Data Notification: ![Project Homepage](Employee-Management-System-Frontend/public/images/screenshots/unsave-form-changes.png)
 
+### Test Results
+
+Vitest Test Results: ![Project Homepage](Employee-Management-System-Frontend/public/images/screenshots/vitest-result.png)
+Cypress E2E Test Results: ![Project Homepage](Employee-Management-System-Frontend/public/images/screenshots/cypress-result.png)
+
 ### Development Assumptions
 
 During the development of the "User Navigates Away Warning for Unsaved Changes" feature, the following assumption was made:

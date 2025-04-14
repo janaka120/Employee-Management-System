@@ -93,7 +93,7 @@ describe("EmployeeListPage", () => {
 
     renderWithProviders();
 
-    expect(await screen.findByText("Employee List Page")).toBeInTheDocument();
+    expect(await screen.findByText("Employees Summary")).toBeInTheDocument();
     expect(await screen.findByTestId("mock-table")).toBeInTheDocument();
 
     await waitFor(() => {
