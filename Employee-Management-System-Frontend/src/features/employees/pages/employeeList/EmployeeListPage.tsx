@@ -1,12 +1,13 @@
 import { useEffect } from "react";
 import { Alert, message } from "antd";
 import { useAppDispatch, useAppSelector } from "../../../../store/store-hooks";
-import { selectEmployeeList, setEmployeeList } from "../../employeeSlice";
+import { selectEmployeeList, setEmployeeList } from "../../EmployeeSlice";
 import EmployeesTable from "./components/EmployeesTable";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { deleteEmployee, getAllEmployees } from "../../services/employeesApi";
+import { deleteEmployee, getAllEmployees } from "../../services/EmployeesApi";
+import LoadingIndicator from "../../../../components/LoadingIndicator";
 
-function EmployeeListPage() {
+const EmployeeListPage = () => {
   const employeeList = useAppSelector(selectEmployeeList);
   const dispatch = useAppDispatch();
   const queryClient = useQueryClient();
@@ -40,7 +41,7 @@ function EmployeeListPage() {
   });
 
   if (isLoading) {
-    return <div>Loading employees...</div>;
+    return <LoadingIndicator text="Loading employees..." />;
   }
 
   if (isError) {
@@ -55,7 +56,6 @@ function EmployeeListPage() {
       />
     );
   }
-
   return (
     <div>
       <h1>Employee List Page</h1>
@@ -64,6 +64,6 @@ function EmployeeListPage() {
       </div>
     </div>
   );
-}
+};
 
 export default EmployeeListPage;

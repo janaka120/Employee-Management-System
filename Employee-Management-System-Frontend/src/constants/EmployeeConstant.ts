@@ -1,4 +1,4 @@
-import { GenderType } from "../features/employees/employeeTypes";
+import { GenderType } from "../features/employees/EmployeeTypes";
 
 export const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
@@ -18,3 +18,5 @@ export const DEFAULT_EMPLOYEE_FORM = {
 export const VALID_EMAIL_REGEX = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
 
 export const SINGAPORE_COUNTRY_CODE = "+65";
+
+export const PAGE_SIZE = 10;
