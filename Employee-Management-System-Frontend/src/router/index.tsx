@@ -2,7 +2,7 @@ import { createBrowserRouter, RouteObject } from "react-router-dom";
 
 import MainLayout from "../layouts/MainLayout";
 import NotFoundPage from "../pages/NotFoundPage";
-import { homeRoute, employeeRoutes } from "./employee-routes";
+import { homeRoute, employeeRoutes } from "./EmployeeRoutes";
 
 const routes: RouteObject[] = [
   {
