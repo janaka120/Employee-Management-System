@@ -1,5 +1,5 @@
 import { MouseEventHandler, ReactNode } from "react";
-import { Link, useNavigate, To } from "react-router-dom";
+import { Link, useNavigate, To, useLocation } from "react-router-dom";
 import {
   selectIsEmployeeFormDirty,
   setIsShowFormChangeAlert,
@@ -19,8 +19,12 @@ const TrackLink = ({ to, onClick, children, ...rest }: TrackLinkI) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const isFormDirty = useAppSelector(selectIsEmployeeFormDirty);
+  const location = useLocation();
 
   const handleClick: MouseEventHandler<HTMLAnchorElement> = (event) => {
+    if (location.pathname === to) {
+      return;
+    }
     if (isFormDirty) {
       dispatch(setIsShowFormChangeAlert(true));
       dispatch(setSelectedRoute(to));

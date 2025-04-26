@@ -3,7 +3,7 @@ import { RootState } from "../../store";
 import { EmployeeI } from "./EmployeeTypes";
 import { To } from "react-router-dom";
 
-interface EmployeeState {
+export interface EmployeeState {
   employeeList: EmployeeI[];
   isEmployeeFormDirty: boolean;
   isShowFormChangeAlert: boolean;
