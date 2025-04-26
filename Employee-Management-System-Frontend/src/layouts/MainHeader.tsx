@@ -1,9 +1,9 @@
 import { HomeOutlined } from "@ant-design/icons";
 import { Menu } from "antd";
 import { Header } from "antd/es/layout/layout";
-import { Link } from "react-router-dom";
 import { PATHS } from "../constants/Paths";
 import "./styles/MainHeader.css";
+import TrackLink from "../components/TrackLink";
 
 const MainHeader = () => {
   return (
@@ -17,7 +17,7 @@ const MainHeader = () => {
           {
             key: "employee-list",
             icon: <HomeOutlined />,
-            label: <Link to={PATHS.EMPLOYEE_LIST}>Home</Link>,
+            label: <TrackLink to={PATHS.EMPLOYEE_LIST}>Home</TrackLink>,
           },
         ]}
       />

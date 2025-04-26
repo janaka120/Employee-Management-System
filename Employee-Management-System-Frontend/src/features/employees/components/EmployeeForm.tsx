@@ -27,9 +27,11 @@ import {
   validName,
   validPhoneNumber,
 } from "../../../utils/helpers";
-
-import "./EmployeeForm.css";
 import usePageChangeListerHook from "../hooks/usePageChangeListerHook";
+import { setIsEmployeeFormDirty } from "../EmployeeSlice";
+import { useAppDispatch } from "../../../store/store-hooks";
+import ChangeWarningDialog from "./ChangeWarningDialog";
+import "./styles/EmployeeForm.css";
 
 const { Title } = Typography;
 
@@ -60,6 +62,7 @@ const EmployeeForm = ({
     mode: "onBlur",
   });
 
+  const dispatch = useAppDispatch();
   usePageChangeListerHook(isDirty);
 
   useEffect(() => {
@@ -78,6 +81,10 @@ const EmployeeForm = ({
       reset();
     }
   }, [isSuccess, reset]);
+
+  useEffect(() => {
+    dispatch(setIsEmployeeFormDirty(isDirty));
+  }, [isDirty, dispatch]);
 
   const dateOfBirth = useWatch({ control, name: "dob" });
 
@@ -263,6 +270,7 @@ const EmployeeForm = ({
           </Flex>
         </Form.Item>
       </Form>
+      <ChangeWarningDialog />
     </div>
   );
 };

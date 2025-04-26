@@ -1,3 +1,5 @@
+import { useEffect, useState } from "react";
+import { useLocation } from "react-router-dom";
 import {
   HomeOutlined,
   LaptopOutlined,
@@ -5,12 +7,21 @@ import {
 } from "@ant-design/icons";
 import { Menu } from "antd";
 import Sider from "antd/es/layout/Sider";
-import { Link } from "react-router-dom";
 import { PATHS } from "../constants/Paths";
-import { useState } from "react";
+import TrackLink from "../components/TrackLink";
 
 const MainSider = () => {
   const [collapsed, setCollapsed] = useState(false);
+  const [selectedKeys, setSelectedKeys] = useState(["mail"]);
+  const location = useLocation();
+
+  useEffect(() => {
+    if (location.pathname === PATHS.ADD_EMPLOYEE_DETAIL) {
+      setSelectedKeys([PATHS.ADD_EMPLOYEE_DETAIL]);
+    } else {
+      setSelectedKeys([PATHS.EMPLOYEE_LIST]);
+    }
+  }, [location.pathname]);
 
   return (
     <Sider
@@ -26,6 +37,7 @@ const MainSider = () => {
         defaultSelectedKeys={["employee-list"]}
         defaultOpenKeys={["employee"]}
         mode="inline"
+        selectedKeys={selectedKeys}
         items={[
           {
             key: "employee",
@@ -33,14 +45,20 @@ const MainSider = () => {
             label: "Employees",
             children: [
               {
-                key: "employee-list",
+                key: PATHS.EMPLOYEE_LIST,
                 icon: <HomeOutlined />,
-                label: <Link to={PATHS.EMPLOYEE_LIST}>Employee List</Link>,
+                label: (
+                  <TrackLink to={PATHS.EMPLOYEE_LIST}>Employee List</TrackLink>
+                ),
               },
               {
-                key: "employee-add",
+                key: PATHS.ADD_EMPLOYEE_DETAIL,
                 icon: <PlusCircleOutlined />,
-                label: <Link to={PATHS.ADD_EMPLOYEE_DETAIL}>Add Employee</Link>,
+                label: (
+                  <TrackLink to={PATHS.ADD_EMPLOYEE_DETAIL}>
+                    Add Employee
+                  </TrackLink>
+                ),
               },
             ],
           },
