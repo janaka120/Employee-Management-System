@@ -2,13 +2,9 @@ import { render, screen } from "@testing-library/react";
 import { BrowserRouter } from "react-router-dom";
 import MainSider from "../MainSider";
 import { PATHS } from "../../constants/Paths";
+import { renderWithProviders } from "../../utils/test-provider-utils";
 
-const renderWithRouter = () =>
-  render(
-    <BrowserRouter>
-      <MainSider />
-    </BrowserRouter>
-  );
+const renderWithRouter = () => renderWithProviders(<MainSider />);
 
 describe("MainSider", () => {
   it("renders EMS header", () => {

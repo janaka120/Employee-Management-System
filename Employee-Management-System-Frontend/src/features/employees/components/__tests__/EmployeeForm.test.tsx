@@ -1,9 +1,10 @@
-import { render, screen, fireEvent, waitFor } from "@testing-library/react";
+import { screen, fireEvent, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 
 import EmployeeForm from "../EmployeeForm";
 import { vi } from "vitest";
 import { EmployeeI } from "../../EmployeeTypes";
+import { renderWithProviders } from "../../../../utils/test-provider-utils";
 
 const mockSubmit = vi.fn();
 const mockCancel = vi.fn();
@@ -21,7 +22,7 @@ const mockEmployee: EmployeeI = {
 
 describe("EmployeeForm component", () => {
   beforeEach(() => {
-    render(
+    renderWithProviders(
       <EmployeeForm
         onSubmit={mockSubmit}
         isSuccess={false}
@@ -123,7 +124,7 @@ describe("EmployeeForm component", () => {
   });
 
   it("should pre-fill form with existing employee data", () => {
-    render(
+    renderWithProviders(
       <EmployeeForm
         onSubmit={vi.fn()}
         isSuccess={false}
@@ -147,7 +148,7 @@ describe("EmployeeForm component", () => {
     const user = userEvent.setup();
     const mockSubmit = vi.fn();
 
-    render(
+    renderWithProviders(
       <EmployeeForm
         onSubmit={mockSubmit}
         isSuccess={false}

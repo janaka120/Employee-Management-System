@@ -16,6 +16,7 @@ const ChangeWarningDialog = () => {
 
   return (
     <Modal
+      data-testid="change-warning-dialog"
       title="Form has been modified"
       open={showAlert || false}
       onOk={() => {

@@ -1,14 +1,9 @@
-import { render, screen } from "@testing-library/react";
-import { BrowserRouter } from "react-router-dom";
+import { screen } from "@testing-library/react";
 import MainHeader from "../MainHeader";
 import { PATHS } from "../../constants/Paths";
+import { renderWithProviders } from "../../utils/test-provider-utils";
 
-const renderWithRouter = () =>
-  render(
-    <BrowserRouter>
-      <MainHeader />
-    </BrowserRouter>
-  );
+const renderWithRouter = () => renderWithProviders(<MainHeader />);
 
 describe("MainHeader", () => {
   it("renders the header with Home link", () => {
