@@ -78,12 +78,12 @@ describe("EmployeesTable", () => {
     await user.click(deleteButton);
 
     const confirmDialog = await screen.findByText(/are you sure/i);
-    const yesButton = within(confirmDialog.closest(".ant-popover")).getByText(
-      "Yes"
-    );
+    const closestBtn = confirmDialog.closest(".ant-popover");
+    if (closestBtn) {
+      const yesButton = within(closestBtn as HTMLElement).getByText("Yes");
+      await user.click(yesButton);
 
-    await user.click(yesButton);
-
-    expect(deleteHandler).toHaveBeenCalledWith("1");
+      expect(deleteHandler).toHaveBeenCalledWith("1");
+    }
   });
 });

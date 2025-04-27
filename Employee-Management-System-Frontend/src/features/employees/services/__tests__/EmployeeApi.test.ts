@@ -8,6 +8,8 @@ import {
   getEmployeeDetails,
 } from "../EmployeesApi";
 import { API_BASE_URL } from "../../../../constants/EmployeeConstant";
+import { GenderType } from "../../EmployeeTypes";
+import { QueryClient } from "@tanstack/react-query";
 
 vi.mock("axios");
 
@@ -18,7 +20,7 @@ const mockEmployees = [
     lastName: "Doe",
     email: "john@example.com",
     phone: "1234567890",
-    gender: "Male",
+    gender: "Male" as GenderType,
     dob: "1990-01-01",
     joinedDate: "2022-01-01",
   },
@@ -30,17 +32,16 @@ describe("Employee API Service", () => {
   });
 
   it("getAllEmployees should return formatted employee list on success", async () => {
-    axios.get.mockResolvedValue({
+    (axios.get as ReturnType<typeof vi.fn>).mockResolvedValue({
       data: { status: "success", data: mockEmployees },
     });
-
     const result = await getAllEmployees();
     expect(result).toEqual([]);
     expect(axios.get).toHaveBeenCalledWith(`${API_BASE_URL}/employees`);
   });
 
   it("addEmployee should return added employee on success", async () => {
-    axios.post.mockResolvedValue({
+    (axios.post as ReturnType<typeof vi.fn>).mockResolvedValue({
       data: { status: "success", data: mockEmployees[0] },
     });
 
@@ -53,7 +54,7 @@ describe("Employee API Service", () => {
   });
 
   it("updateEmployee should return updated employee on success", async () => {
-    axios.put.mockResolvedValue({
+    (axios.put as ReturnType<typeof vi.fn>).mockResolvedValue({
       data: { status: "success", data: mockEmployees[0] },
     });
 
@@ -66,7 +67,7 @@ describe("Employee API Service", () => {
   });
 
   it("deleteEmployee should return deleted employee data on success", async () => {
-    axios.delete.mockResolvedValue({
+    (axios.delete as ReturnType<typeof vi.fn>).mockResolvedValue({
       data: { status: "success", data: mockEmployees[0] },
     });
 
@@ -76,11 +77,17 @@ describe("Employee API Service", () => {
   });
 
   it("getEmployeeDetails should return employee details on success", async () => {
-    axios.get.mockResolvedValue({
+    (axios.get as ReturnType<typeof vi.fn>).mockResolvedValue({
       data: { status: "success", data: mockEmployees[0] },
     });
-
-    const result = await getEmployeeDetails({ queryKey: ["employee", "1"] });
+    const mockClient = new QueryClient();
+    const mockSignal = new AbortController().signal;
+    const result = await getEmployeeDetails({
+      client: mockClient,
+      queryKey: ["employee", "1"],
+      signal: mockSignal,
+      meta: {},
+    });
     expect(result).toEqual(mockEmployees[0]);
     expect(axios.get).toHaveBeenCalledWith(`${API_BASE_URL}/employees/1`);
   });
@@ -92,8 +99,15 @@ describe("Employee API Service", () => {
   });
 
   it("should throw error if id not provided to getEmployeeDetails", async () => {
+    const mockClient = new QueryClient();
+    const mockSignal = new AbortController().signal;
     await expect(
-      getEmployeeDetails({ queryKey: ["employee", undefined] })
+      getEmployeeDetails({
+        client: mockClient,
+        queryKey: ["employee", undefined],
+        signal: mockSignal,
+        meta: {},
+      })
     ).rejects.toThrow("Something went wrong");
   });
 });

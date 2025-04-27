@@ -1,5 +1,7 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { render, screen } from "@testing-library/react";
 import { vi } from "vitest";
+import type { MockInstance } from "vitest";
 import { message } from "antd";
 import userEvent from "@testing-library/user-event";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
@@ -51,7 +53,11 @@ describe("AddEmployeeDetailsPage", () => {
 
   beforeEach(() => {
     queryClient = new QueryClient();
-    invalidateSpy = vi.spyOn(queryClient, "invalidateQueries");
+    // invalidateSpy = vi.spyOn(queryClient, "invalidateQueries");
+    invalidateSpy = vi.spyOn(
+      queryClient as any,
+      "invalidateQueries"
+    ) as MockInstance;
   });
 
   const renderWithProvider = () =>
