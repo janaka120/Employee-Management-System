@@ -200,8 +200,15 @@ Unsave Data Notification: ![Project Homepage](Employee-Management-System-Fronten
 Vitest Test Results: ![Project Homepage](Employee-Management-System-Frontend/public/images/screenshots/vitest-result.png)
 Cypress E2E Test Results: ![Project Homepage](Employee-Management-System-Frontend/public/images/screenshots/cypress-result.png)
 
-### Development Assumptions
+### Production Build
 
-During the development of the "User Navigates Away Warning for Unsaved Changes" feature, the following assumption was made:
+Using npm:
 
-- **Navigation Away Warning on Unsaved Changes:** The warning displayed to the user when attempting to navigate away from the form with unsaved changes is only effective upon a **full page refresh**. If the user navigates to another part of the application through in-app routing without a full refresh, the warning mechanism might not be triggered. This behavior is specific to the current implementation and might be addressed in future iterations.
+```bash
+npm run build
+npm run preview
+```
+
+### Lighthouse Report
+
+Home Page: ![Project Homepage](Employee-Management-System-Frontend/public/images/screenshots/lighthouse-result.png)

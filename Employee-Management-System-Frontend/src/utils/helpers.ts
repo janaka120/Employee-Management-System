@@ -101,7 +101,7 @@ export const isJoinedDateAfterDOB = (
   dateOfBirth: string | null | undefined
 ): true | string => {
   if (!joinedDate || !dateOfBirth) {
-    return true; // Adjust based on your requirements for empty dates
+    return true;
   }
   const joinedDateObj = dayjs(joinedDate, DATE_FORMATE);
 
